@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns = "http://www.w3.org/ns/widgets"
+
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id          = "com.dragon.www"
+        version     = "1.0.0"
+        versionCode = "10" >
+<name>商科專業科目統測試題練習</name>
+<description>
+商科專業科目統測試題練習
+</description>
+
+<author href="http://203.68.189.154" email="dragonenator@gmail.com">
+dragon-Sun
+</author>
+<content src=”index.html” />
+<access origin=”*” />
+<icon src="img/icongood.png" gap:platform="android" />
+<gap:splash src="img/splashgood.png" gap:platform="android" />
+
+<preference name="orientation" value="portrait" />
+<preference name="android-minSdkVersion" value="7" />
+</widget>

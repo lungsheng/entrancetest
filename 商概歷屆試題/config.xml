@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns = "http://www.w3.org/ns/widgets"
+    xmlns:gap = "http://phonegap.com/ns/1.0"
+    id        = "com.phonegap.SunMoonLakeGuide"
+    version   = "1.0.0">
+
+<name>統測商概試題練習</name>
+
+<description>
+102,103,104商科試題練習.
+</description>
+
+<author href="http://203.68.189.59" email="dragonenator@gmail.com">
+dragon-Sun
+</author>
+
+<icon src="img/icongood.png" gap:platform="android" />
+<gap:splash src="img/splashgood.png" gap:platform="android" />
+
+<preference name="orientation" value="portrait" />
+<preference name="android-minSdkVersion" value="7" />
+</widget>
