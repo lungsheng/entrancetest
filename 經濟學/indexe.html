@@ -101,7 +101,7 @@ $("#chooseitem_0").css("background-color","#CFf");
 $("#chooseitem_1").css("background-color","#CFf");
 $("#chooseitem_2").css("background-color","#CFf");
 $("#chooseitem_3").css("background-color","#CFf");
-	pageshownumb=1;
+	//pageshownumb=1;
 var quest="共"+totalque+"題目前第"+(questionindex-qbegin+1)+"題:<br>"+que[questionindex].que;
 $("#question").html(quest);
 $("#choose0label").html("<div>A:"+que[questionindex].ans1+"</div>");
@@ -210,14 +210,14 @@ function putresult(){
 	if(que[i].img!=null){ 
 queimg="<div><img src=img/"+que[i].img+" ></div>";}
 		if(queright[i-qbegin]==1){
-s=k+"<div class='libg1'>答對:"+que[i].que+":"+sans+"</div>"+queimg;
+s=s+k+"<div class='libg1'>答對:"+que[i].que+":"+sans+"</div>"+queimg;
 		}else{
-s=k+"<div class='libg2'>答錯:"+que[i].que+":"+sans+"</div>"+queimg;	
+s=s+k+"<div class='libg2'>答錯:"+que[i].que+":"+sans+"</div>"+queimg;	
 			}
-		$("#rightlist").append(s);
+		
 		}
 		pageshownumb=0;//for
-	  }//if
+	  }$("#rightlist").html(s);//if
 	}
 function unable(){
 	//alert(99);
