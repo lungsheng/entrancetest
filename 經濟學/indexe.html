@@ -1,0 +1,317 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="utf-8">
+<title>新北高工資處科</title>
+<link href="js/jquery.mobile-1.0.min.css" rel="stylesheet" type="text/css"/>
+<script src="js/jquery-1.6.4.min.js" type="text/javascript"></script>
+<script src="js/jquery.mobile-1.0.min.js" type="text/javascript"></script>
+
+<script src="quee.js">
+</script>
+
+<style>
+#question {
+	background-color:#FFC;
+	border:#39F solid 3px;
+	border-radius:5px;
+	font-size:23px;
+	font-family:"標楷體";
+	height:auto;
+	}
+#judge {background-color:#FFC;
+border:#39F solid 3px;
+	border-radius:5px;
+	font-size:23px;
+	font-family:"標楷體";
+width:250px;
+height:auto;
+}
+.libg2{
+	background-color:#FCC;
+	font-size:18px;
+	border:#6CF solid 3px;
+	border-radius:5px;}
+.libg1{
+	background-color:#6CC;
+	font-size:18px;
+	border:#fCc solid 2px;
+	border-radius:5px;
+	}	
+.libg3{
+	background-color:#6CF;
+	font-size:25px;
+	border:#6CF solid 2px;
+	border-radius:5px;
+	}
+ #chooseitem_0,#chooseitem_1,#chooseitem_2,#chooseitem_3{
+	height:50px;
+	font-size:17px;
+	border:#000 1px solid;
+	text-align:left;
+	font-family:"標楷體";
+	background-color:#CF9;
+}
+a {
+	text-decoration:none;
+	}
+</style>
+<script>
+$(function(){
+//alert(que.length);
+var ans;
+var questionindex=0;
+var totalscore=0;
+var eachscore=4;
+var ansindex=0;
+var queright=[];
+var totalque=0;
+var pageshownumb=1;
+var qbegin=0;
+var qend=0;
+var k=0;
+var que=[];
+var queimg;
+var clickyesno="yes";
+$("#p105").click(function(e) {
+	var s="<h1>105年經濟統測試題</h1>";
+	que=que105;
+	$("#title").html(s);
+	qbegin=0;questionindex=qbegin;
+	qend=24;
+	totalque=qend-qbegin+1;
+	
+	clearqueright();
+	totalscore=0;
+ putque();able();
+});
+
+$("#p104").click(function(e) {
+	var s="<h1>104年經濟統測試題</h1>";
+	que=que104;
+	$("#title").html(s);
+	qbegin=0;questionindex=qbegin;
+	qend=24;
+	totalque=qend-qbegin+1;
+	
+	clearqueright();
+	totalscore=0;
+ putque();able();
+});
+$("#p103").click(function(e) {
+	var s="<h1>103年經濟統測試題</h1>";
+	que=que103;
+	$("#title").html(s);
+	qbegin=0;questionindex=qbegin;
+	qend=24;
+	totalque=qend-qbegin+1;//alert(queright.length);
+	clearqueright();
+	totalscore=0;
+ putque();able();
+});
+$("#p102").click(function(e) {
+	var s="<h1>102年經濟統測試題</h1>";
+	que=que102;
+	$("#title").html(s);
+	qbegin=0;questionindex=qbegin;
+	qend=24;
+	totalque=qend-qbegin+1;//alert(queright.length);
+	clearqueright();
+	totalscore=0;
+ putque();able();
+});
+
+
+$("#b2").click(function(e) {
+    $.mobile.changePage("#page2");
+});
+$("#result").click(function(e) {
+		putresult();//alert(99);
+        $.mobile.changePage("#page3");
+		
+    });
+function putque(){
+	clickyesno="yes";
+$("#chooseitem_0").css("background-color","#CF9");
+$("#chooseitem_1").css("background-color","#CF9");
+$("#chooseitem_2").css("background-color","#CF9");
+$("#chooseitem_3").css("background-color","#CF9");
+var quest="共"+totalque+"題目前第"+(questionindex-qbegin+1)+"題:<br>"+que[questionindex].que;
+$("#question").html(quest);
+$("#choose0label").html("<div>A:"+que[questionindex].ans1+"</div>");
+
+$("#choose1label").html("<div>B:"+que[questionindex].ans2+"</div>");
+
+$("#choose2label").html("<div>C:"+que[questionindex].ans3+"</div>");
+
+$("#choose3label").html("<div>D:"+que[questionindex].ans4+"</div>");
+var im=que[questionindex].img;
+if(im!=null){
+var im="img/"+im
+$("#imgdiv").attr("src",im);
+$("#imgdiv").show();
+}else{
+	$("#imgdiv").hide();	
+	}
+
+ans=que[questionindex].ans;
+st="目前分數為:"+totalscore+"分";			
+		$("#judge").html(st);
+	
+	}
+	
+$("#chooseitem_0").click(function(e) {
+   if(clickyesno=="yes"){ check(1);clickyesno="no"}
+   
+});
+$("#chooseitem_1").click(function(e) {
+    if(clickyesno=="yes"){check(2);clickyesno="no"}
+});
+$("#chooseitem_2").click(function(e) {
+    if(clickyesno=="yes"){check(3);clickyesno="no"}
+});
+//$("#chooseitem_3").attr("checked",false);
+$("#chooseitem_3").click(function(e) {
+    if(clickyesno=="yes"){check(4);clickyesno="no"}
+});
+
+$("#nextque").unbind("click");
+//}
+
+function check(anspass){
+	var t;
+	clickyesno="yes";
+if(ans==1){$("#chooseitem_0").css("background-color","#aaf");t="A";};
+if(ans==2){$("#chooseitem_1").css("background-color","#aaf");t="B";};
+if(ans==3){$("#chooseitem_2").css("background-color","#aaf");t="C";};
+if(ans==4){$("#chooseitem_3").css("background-color","#aaf");t="D";};
+	if(anspass==ans){
+		totalscore+=eachscore;
+st="YES答對了!目前分數為:"+totalscore+"分答案為:"+t;
+		$("#judge").html(st);
+		queright.push(1);
+		}else{
+st="NO答錯了!目前分數為:"+totalscore+"分答案為:"+t;			
+		$("#judge").html(st);
+		queright.push(0);	
+			}//if
+if(qend==questionindex){
+	alert("結束!看結果!");
+	questionindex=0;
+	return;
+	}
+	questionindex++;
+$("#nextque").click(function(e) {
+	//$("#choosep").html(stchoose);
+    //
+	putque();able();
+	
+});
+
+	}
+	
+function putresult(){
+	//alert(queright.length);
+	var s="",s1,sans;
+	var k=0;
+	//if(pageshownumb==1){
+		s1="總分:100分得分:"+totalscore+"分";
+		$("#scoreresult").html(s1);
+		//alert(queright.length);
+		//alert(queright.length);
+	for(i=qbegin;i<queright.length+qbegin;i++){
+		k++;queimg="";
+	if(que[i].ans==1){sans=que[i].ans1};
+	if(que[i].ans==2){sans=que[i].ans2};
+	if(que[i].ans==3){sans=que[i].ans3};
+	if(que[i].ans==4){sans=que[i].ans3};
+if(que[i].img!=null){ 
+queimg="<div><img src=img/"+que[i].img+" ></div>";
+
+};
+		if(queright[i-qbegin]==1){
+s=s+k+"<div class='libg1'>答對:"+que[i].que+":"+sans+"</div>"+queimg;
+		}else{
+s=s+k+"<div class='libg2'>答錯:"+que[i].que+":"+sans+"</div>"+queimg;	
+			}
+		
+		}
+		$("#rightlist").html(s);
+	}
+function clearqueright(){
+	if(queright.length!=0){
+	//for(var i=0;i<queright.length;i++){
+		//queright.pop();
+		queright.length=0;
+		}//}
+		//alert(queright.length);
+	}
+})
+
+</script>
+</head> 
+<body> 
+
+<div data-role="page" id="page">
+	<div data-role="header">
+		<h1>經濟學統測試題-------------<a href="../index.html" target="_self">首頁</a></h1>
+  </div>
+	<div data-role="content">	
+		<ul data-role="listview" data-inset="true" data-theme="e">
+	<li><a href="#page2" id="p102">102年經濟學統測試題</a></li>
+            <li><a href="#page2" id="p103">103年經濟學統測試題</a></li>
+			<li><a href="#page2" id="p104">104年經濟學統測試題</a></li><li><a href="#page2" id="p105">105年經濟學統測試題</a></li>
+		</ul>		
+	</div>
+	<div data-role="footer">
+		<h4>新北高工資料處理科</h4>
+	</div>
+</div>
+
+<div data-role="page" id="page2" data-theme="e">
+	<div data-role="header" data-theme="e" >
+<div id="title"></div>
+<a href="#page" class="ui-btn ui-icon-back ui-btn-icon-left">Back</a>
+	</div>
+	<div data-role="content">
+    <div id="question"></div>
+    <p><br>
+   <center> <div data-role="listview" data-inset="true" class="ui-bar-c">
+    <div id="chooseitem_0"><a href="#" id="choose0label" >頁面</a></div>
+      <div id="chooseitem_1"><a href="#" id="choose1label" >頁面</a></div>
+      <div id="chooseitem_2"><a href="#" id="choose2label" >頁面</a></div>
+      <div id="chooseitem_3"><a href="#" id="choose3label">頁面</a></div>
+    </div></center>
+
+      </div>
+	  
+    
+<a href="#" data-role="button" class="ui-btn-inline" id="nextque">下一題--(選完才可下一題)</a>
+	<div id="judge">請選擇!</div>			
+	<a href="#" data-role="button" class="ui-btn-inline" id="result" class="libg1">看結果</a>
+<div><img src="" id=imgdiv></div>
+	<div data-role="footer" data-theme="e">
+		<h4>新北高工資料處理科</h4>
+	</div>
+</div>
+
+<div data-role="page" id="page3" data-theme="e">
+	<div data-role="header" data-theme="e">
+		<h1>經濟統測試題</h1>
+       <div id="b2"> <a href="#page2"  class="ui-btn ui-icon-back ui-btn-icon-left">Back</a></div>
+	</div>
+	<div data-role="content">
+    <div id="scoreresult" class="libg3">結果:</div>
+<div id="rightlist">
+	    
+      </div>	
+				
+	</div>
+	<div data-role="footer" data-theme="e">
+		<h4>新北高工資料處理科</h4>
+	</div>
+</div>
+
+
+</body>
+</html>
